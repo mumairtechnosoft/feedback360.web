@@ -1,0 +1,20 @@
+<div class="container">
+    <h5>Feedbacks For You</h5>
+    <!-- <ng-container *ngIfElse="feedbackListDTO.length > 0; else #noRecord"> -->
+    <div class="card" *ngFor="let item of feedbackListDTO">
+        <div class="card-body">
+          <h5 class="card-title">Shahbaz Khawaja sent you a feedback</h5>
+          <div class="row">
+            <div class="col-md-2">
+                <b>Skill: </b>Technical Skills
+            </div>
+            <div class="col-md-4">
+                <b>Sub Skill: </b>Comprehension / Understanding the Problem
+            </div>
+          </div>
+          <p class="card-text">{{ item.comments }}</p>
+        </div>
+      </div>
+    <!-- </ng-container>
+    <ng-template #noRecord></ng-template> -->
+</div>
