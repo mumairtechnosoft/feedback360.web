@@ -9,19 +9,24 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, pathMatch: 'full'
-  },
-  {
-    path: 'fetch-feedbacks', component: FeedbackListComponent
-  },
-  {
-    path: 'add-feedback', component: AddFeedbackComponent
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   },
   {
     path: 'login', component: LoginComponent
   },
   {
     path: 'register-user', component: RegisterComponent
+  },
+  {
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'fetch-feedbacks', component: FeedbackListComponent
+  },
+  {
+    path: 'add-feedback', component: AddFeedbackComponent
   },
   {
     path: '**', component: PageNotFoundComponent
