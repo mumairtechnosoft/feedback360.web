@@ -10,14 +10,14 @@
   
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="form3Example3" class="form-control form-control-lg"
-                placeholder="Enter a valid email address" formControlName="email" />
+              <input type="text" id="form3Example3" class="form-control form-control-lg"
+                placeholder="Enter username" formControlName="username" [(ngModel)]="loginDTO.username" />
             </div>
   
             <!-- Password input -->
             <div class="form-outline mb-3">
               <input type="password" id="form3Example4" class="form-control form-control-lg"
-                placeholder="Enter password" formControlName="password" />
+                placeholder="Enter password" formControlName="password" [(ngModel)]="loginDTO.password" />
             </div>
   
             <div class="d-flex justify-content-between align-items-center">

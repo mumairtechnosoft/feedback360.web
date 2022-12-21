@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from './shared/data-service.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NgAuthModule } from './oidc/ng-auth.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegisterComponent } from './register/register.component';
       maxOpened: 1,
       newestOnTop: true,
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgAuthModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
