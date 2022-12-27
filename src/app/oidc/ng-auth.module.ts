@@ -4,17 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './guards';
-import { AuthInterceptor } from './interceptors';
-import { AuthenticationService } from './services';
-import { LoginCallbackComponent, LogoutCallbackComponent, SilentCallbackComponent } from './components';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
-    declarations: [
-        LoginCallbackComponent,
-        LogoutCallbackComponent,
-        SilentCallbackComponent,
-    ],
+    declarations: [],
     imports: [
         CommonModule,
         FormsModule,
@@ -25,10 +20,6 @@ import { LoginCallbackComponent, LogoutCallbackComponent, SilentCallbackComponen
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         AuthenticationService,
     ],
-    exports: [
-        LoginCallbackComponent,
-        LogoutCallbackComponent,
-        SilentCallbackComponent,
-    ]
+    exports: []
 })
 export class NgAuthModule {}

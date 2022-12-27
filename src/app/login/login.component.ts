@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../oidc/services/authentication.service';
 import { LoginRequestDTO } from './models/login.model';
 import { LoginService } from './services/login.service';
 
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginDTO!: LoginRequestDTO;
 
-  constructor(private _fb: FormBuilder, private _loginService: LoginService) {
+  constructor(
+  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService) {
     this.loginDTO = new LoginRequestDTO();
   }
 
@@ -29,10 +32,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
-    console.log(this.loginDTO);
     this._loginService.login(this.loginDTO)?.subscribe((response) => {
+      console.log(response);
       alert('Hello There!');
+      this._authService.completeAuthentication();
+      this._router.navigateByUrl('/fetch-feedbacks');
     })
   }
 

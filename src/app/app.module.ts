@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,9 +16,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { DataService } from './shared/data-service.service';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgAuthModule } from './oidc/ng-auth.module';
+import { AuthGuard } from './oidc/guards/auth.guard';
+import { AuthInterceptor } from './oidc/interceptors/auth.interceptor';
+import { AuthenticationService } from './oidc/services/authentication.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { NgAuthModule } from './oidc/ng-auth.module';
     BrowserAnimationsModule,
     NgAuthModule
   ],
-  providers: [DataService],
+  providers: [DataService, AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

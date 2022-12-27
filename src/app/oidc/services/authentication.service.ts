@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User, UserManager, WebStorageStateStore } from 'oidc-client';
-import { UserManagerSettings } from '../models';
+import { UserManagerSettings } from '../models/auth-client-settings';
 
 @Injectable()
 export class AuthenticationService {
@@ -26,8 +26,10 @@ export class AuthenticationService {
   }
 
   completeAuthentication() {
+    debugger;
     this.getUserManager();
     return this._userManager.signinRedirectCallback().then((user) => {
+      debugger;
       this._user = user;
       this.isUserDefined = true;
     });
@@ -64,11 +66,11 @@ export class AuthenticationService {
       //specify the access privileges, specifies the information returned about the authenticated user.
       userManagerSettings.scope = 'api'; 
       
-      userManagerSettings.redirect_uri = 'http://localhost:4200/login-callback'; //start login process
-      userManagerSettings.post_logout_redirect_uri = 'http://localhost:4200/logout-callback'; //start logout process
+      userManagerSettings.redirect_uri = 'http://localhost:4200/fetch-feedbacks'; //start login process
+      userManagerSettings.post_logout_redirect_uri = 'http://localhost:4200/login'; //start logout process
 
-      userManagerSettings.automaticSilentRenew = true;
-      userManagerSettings.silent_redirect_uri = 'http://localhost:4200/silent-callback'; //silent renew oidc doing it automaticly 
+      //userManagerSettings.automaticSilentRenew = true;
+      //userManagerSettings.silent_redirect_uri = 'http://localhost:4200/silent-callback'; //silent renew oidc doing it automaticly 
 
       userManagerSettings.userStore = new WebStorageStateStore({
         store: window.localStorage,

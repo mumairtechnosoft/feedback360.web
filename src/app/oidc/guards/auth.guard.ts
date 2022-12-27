@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     CanActivate
 } from '@angular/router';
-import {
-    AuthenticationService
-} from '../services';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -13,6 +11,7 @@ export class AuthGuard implements CanActivate {
     ) {}
 
     async canActivate() {
+        debugger;
         if (this._authService.isLoggedIn()) {
             return true;
         }

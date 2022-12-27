@@ -10,6 +10,6 @@ export class UserManagerSettings {
     accessTokenExpiringNotificationTime!: number;
     filterProtocolClaims!: boolean;
     loadUserInfo!: boolean;
-    lockSkew!: number ;
+    lockSkew!: number;
     userStore: any;
 }
