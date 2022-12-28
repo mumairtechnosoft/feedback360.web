@@ -21,7 +21,6 @@ export class FeedbackListComponent implements OnInit {
   getListOfFeedbacks() {
     this._feedback.getListOfFeedbacks()?.subscribe((response) => {
       if (response.status) {
-        debugger;
         this.feedbackListDTO = response.payload;
       }
     })

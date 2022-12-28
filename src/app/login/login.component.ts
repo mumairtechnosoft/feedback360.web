@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../oidc/services/authentication.service';
 import { LoginRequestDTO } from './models/login.model';
 import { LoginService } from './services/login.service';
@@ -16,11 +16,17 @@ export class LoginComponent implements OnInit {
   loginDTO!: LoginRequestDTO;
 
   constructor(
-  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService) {
+  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService, private _activatedRoute: ActivatedRoute) {
     this.loginDTO = new LoginRequestDTO();
   }
 
   ngOnInit(): void {
+    // this._authService.startAuthentication();
+    this._activatedRoute.queryParams.subscribe(params => {
+      debugger;
+      this.loginDTO.returnUrl = params['ReturnUrl'];
+    })
+
     this.initializeLoginForm();
   }
 
@@ -32,12 +38,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this._loginService.login(this.loginDTO)?.subscribe((response) => {
-      console.log(response);
-      alert('Hello There!');
-      this._authService.completeAuthentication();
-      this._router.navigateByUrl('/fetch-feedbacks');
-    })
+    if (this.loginForm.valid) {
+      this._loginService.login(this.loginDTO)?.subscribe((response) => {
+        debugger;
+        console.log(response);
+        alert('Hello There!');
+        this._authService.completeAuthentication();
+        this._router.navigateByUrl('/fetch-feedbacks');
+      })
+    }
+    else {
+      this.loginForm.markAllAsTouched();
+    }
   }
 
 }

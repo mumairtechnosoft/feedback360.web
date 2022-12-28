@@ -6,4 +6,5 @@ export class FeedbackListDTO {
     comments!: string;
     created_By!: string;
     modified_Date!: Date;
+    user_Name!: string;
 }

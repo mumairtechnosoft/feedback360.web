@@ -20,4 +20,8 @@ export class FeedbackService {
   getListOfFeedbacks() {
     return this._dataService.genericSericeCaller('get', 'Feedbacks/getAll', null);
   }
+
+  getListOfEmployees() {
+    return this._dataService.genericSericeCaller('get', 'Users/listOfEmployees', null);
+  }
 }

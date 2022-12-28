@@ -11,7 +11,9 @@
             <label for="" class="form-label">Employees <span class="text-danger">*</span></label>
             <select class="form-control" formControlName="employee_Id" [(ngModel)]="addFeedbackDTO.employee_Id">
                 <option [value]="''">Select</option>
+                <option *ngFor="let item of employeeList" [value]="item.id">{{ item.full_Name }}</option>
             </select>
+            <span class="text-danger" *ngIf="addFeedbackForm.controls['employee_Id'].touched && addFeedbackForm.controls['employee_Id'].errors?.['required']">Please Select Employee</span>
         </div>
     </div>
     <br>
@@ -24,6 +26,7 @@
                 <option [value]="2">Feedback</option>
                 <option [value]="3">Suggestion</option>
             </select>
+            <span class="text-danger" *ngIf="addFeedbackForm.controls['category_Id'].touched && addFeedbackForm.controls['category_Id'].errors?.['required']">Please Select Category</span>
         </div>
         <div class="col-md-4 form-group">
             <label for="" class="form-label">Severity <span class="text-danger">*</span></label>
@@ -33,6 +36,7 @@
                 <option [value]="2">High</option>
                 <option [value]="3">Critical</option>
             </select>
+            <span class="text-danger" *ngIf="addFeedbackForm.controls['severity_Id'].touched && addFeedbackForm.controls['severity_Id'].errors?.['required']">Please Select Severity</span>
         </div>
         <div class="form-group col-md-4">
             <label for="" class="form-label">Visibility</label>
@@ -69,6 +73,7 @@
         <div class="col-md-12 form-group">
             <label for="" class="form-label">Your Feedback <span class="text-danger">*</span></label>
             <textarea name="" id="" cols="30" rows="5" class="form-control" formControlName="comments" [(ngModel)]="addFeedbackDTO.comments"></textarea>
+            <span class="text-danger" *ngIf="addFeedbackForm.controls['comments'].touched && addFeedbackForm.controls['comments'].errors?.['required']">Please Enter Feedback</span>
         </div>
     </div>
     <hr>
