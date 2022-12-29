@@ -42,6 +42,7 @@ export class DataService {
     headers = headers.append('Access-Control-Allow-Headers', '*');
     headers = headers.append('Content-Type', 'application/json; charset=UTF-8');
     headers = headers.append('Accept', 'application/json');
+    // headers = headers.append('Authorization', localStorage.getItem("client_"));
     return headers;
   }
 
