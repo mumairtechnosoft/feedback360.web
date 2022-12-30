@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../oidc/services/authentication.service';
 import { LoginRequestDTO } from './models/login.model';
 import { LoginService } from './services/login.service';
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   loginDTO!: LoginRequestDTO;
 
   constructor(
-  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService, private _activatedRoute: ActivatedRoute) {
+  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService, private _activatedRoute: ActivatedRoute, private _toasterService: ToastrService) {
     this.loginDTO = new LoginRequestDTO();
   }
 
@@ -42,9 +43,17 @@ export class LoginComponent implements OnInit {
       this._loginService.login(this.loginDTO)?.subscribe((response) => {
         debugger;
         console.log(response);
-        alert('Hello There!');
-        this._authService.completeAuthentication();
-        this._router.navigateByUrl('/fetch-feedbacks');
+        if (!response.status) {
+          this.loginDTO.password = '';
+          this.loginForm.controls['password'].setValue('');
+          this.loginForm.controls['password'].markAsUntouched();
+          this.loginForm.controls['password'].updateValueAndValidity();
+          this._toasterService.error(response.message);
+        } else {
+          alert('Hello There!');
+          this._authService.completeAuthentication();
+          this._router.navigateByUrl('/fetch-feedbacks');
+        }
       })
     }
     else {
