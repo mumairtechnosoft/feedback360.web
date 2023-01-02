@@ -16,19 +16,20 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginDTO!: LoginRequestDTO;
 
-  constructor(
-  private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService, private _activatedRoute: ActivatedRoute, private _toasterService: ToastrService) {
+  constructor(private readonly _router: Router, private _fb: FormBuilder, private _loginService: LoginService, private _authService: AuthenticationService, private _activatedRoute: ActivatedRoute, private _toasterService: ToastrService) {
     this.loginDTO = new LoginRequestDTO();
   }
 
   ngOnInit(): void {
+    this._authService.completeAuthentication();
+    //this._router.navigateByUrl('/');
     // this._authService.startAuthentication();
-    this._activatedRoute.queryParams.subscribe(params => {
-      debugger;
-      this.loginDTO.returnUrl = params['ReturnUrl'];
-    })
+    // this._activatedRoute.queryParams.subscribe(params => {
+    //   debugger;
+    //   this.loginDTO.returnUrl = params['ReturnUrl'];
+    // })
 
-    this.initializeLoginForm();
+    // this.initializeLoginForm();
   }
 
   initializeLoginForm() {

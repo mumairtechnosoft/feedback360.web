@@ -22,6 +22,7 @@ import { AuthGuard } from './oidc/guards/auth.guard';
 import { AuthInterceptor } from './oidc/interceptors/auth.interceptor';
 import { AuthenticationService } from './oidc/services/authentication.service';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginComponent } from './login/login.component';
     NavMenuComponent,
     PageNotFoundComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

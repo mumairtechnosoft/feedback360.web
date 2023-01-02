@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate {
     ) {}
 
     async canActivate() {
-        debugger;
         if (this._authService.isLoggedIn()) {
             return true;
         }

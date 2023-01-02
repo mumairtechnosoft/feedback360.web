@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../oidc/services';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css']
 })
-export class HomeComponent implements OnInit {
+export class LogoutComponent implements OnInit {
 
-  userName: string | undefined;
   /**
    *
    */
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userName = this._authService.getClaims()?.sub;
+    this._authService.startLogout();
   }
+
 }
