@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-
+debugger;
             const accessToken = this._authService.getAccessToken();
             const headers = req.headers.set(
                 'Authorization',

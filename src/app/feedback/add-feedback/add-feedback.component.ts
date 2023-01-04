@@ -28,7 +28,7 @@ export class AddFeedbackComponent implements OnInit {
 
   initializeFeedbackForm() {
     this.addFeedbackForm = this._fb.group({
-      employee_Id: ['', Validators.required],
+      employee_Id: [0, Validators.required],
       category_Id: [0, Validators.required],
       severity_Id: [0, Validators.required],
       visibility: ['Employee'],

@@ -30,7 +30,7 @@ export class DomainUtills {
       let domain: string = "";
       let env = originalPath.split("-");
       if (originalPath.includes("localhost")) {
-        domain = "https://localhost:7174/";
+        domain = "https://localhost:7062/";
       }
       return domain;
     }

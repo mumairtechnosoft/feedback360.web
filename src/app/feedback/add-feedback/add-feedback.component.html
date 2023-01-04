@@ -10,7 +10,7 @@
         <div class="col-md-12 form-group">
             <label for="" class="form-label">Employees <span class="text-danger">*</span></label>
             <select class="form-control" formControlName="employee_Id" [(ngModel)]="addFeedbackDTO.employee_Id">
-                <option [value]="''">Select</option>
+                <option [value]="0">Select</option>
                 <option *ngFor="let item of employeeList" [value]="item.id">{{ item.full_Name }}</option>
             </select>
             <span class="text-danger" *ngIf="addFeedbackForm.controls['employee_Id'].touched && addFeedbackForm.controls['employee_Id'].errors?.['required']">Please Select Employee</span>

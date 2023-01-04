@@ -9,7 +9,7 @@ export class AuthenticationService {
   private _userManager!: UserManager;
 
   isLoggedIn() {
-    const user: string | null = localStorage.getItem('oidc.user:https://localhost:44376:postman');
+    const user: string | null = localStorage.getItem('oidc.user:https://localhost:7062:postman');
     if (user != null) {
       this._user = JSON.parse(user??'');
     }
@@ -46,6 +46,7 @@ export class AuthenticationService {
   }
 
   completeLogout() {
+    debugger;
     this.getUserManager();
     this._user = null;
     return this._userManager.signoutRedirectCallback();
@@ -64,12 +65,12 @@ export class AuthenticationService {
         new UserManagerSettings();
 
       //set up settings
-      userManagerSettings.authority = 'https://localhost:44376'; //website that responsible for Authentication
+      userManagerSettings.authority = 'https://localhost:7062'; //website that responsible for Authentication
       userManagerSettings.client_id = 'postman'; //uniqe name to identify the project
       userManagerSettings.client_secret = 'postman-secret';
       userManagerSettings.response_type = 'code'; //desired Authentication processing flow - for angular is sutible code flow
       //specify the access privileges, specifies the information returned about the authenticated user.
-      userManagerSettings.scope = 'openid'; 
+      userManagerSettings.scope = 'openid';
       
       userManagerSettings.redirect_uri = 'http://localhost:4200/login'; //start login process
       userManagerSettings.post_logout_redirect_uri = 'http://localhost:4200/home'; //start logout process

@@ -18,5 +18,5 @@
       </div>
       <br>
     </ng-container>
-    <!-- <ng-template #noRecord></ng-template> -->
+    <ng-template *ngIf="feedbackListDTO.length <= 0"><p class="text-danger text-center">No Record Found!</p></ng-template>
 </div>

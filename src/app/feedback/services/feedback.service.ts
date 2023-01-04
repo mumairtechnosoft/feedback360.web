@@ -13,7 +13,7 @@ export class FeedbackService {
     return this._dataService.genericSericeCaller('post', 'Feedbacks/addFeedback', requestDTO);
   }
 
-  getListOfFeedbacksByEmployeeId(employeeId: string) {
+  getListOfFeedbacksByEmployeeId(employeeId: bigint) {
     return this._dataService.genericSericeCaller('get', 'Feedbacks/getAllByEmployeeId?employeeId=' + employeeId, null);
   }
 
@@ -23,5 +23,9 @@ export class FeedbackService {
 
   getListOfEmployees() {
     return this._dataService.genericSericeCaller('get', 'Users/listOfEmployees', null);
+  }
+
+  getEmployee(username: string | undefined) {
+    return this._dataService.genericSericeCaller('get', 'Users/getEmployee?username=' + username, null);
   }
 }

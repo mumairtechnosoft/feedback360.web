@@ -9,6 +9,7 @@ import { AuthenticationService } from '../oidc/services';
 export class NavMenuComponent implements OnInit {
   isExpanded = false;
   userName: string | undefined;
+  role: string | undefined;
 
   /**
    *
@@ -17,7 +18,9 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
     this.userName = this._authService.getClaims()?.sub;
+    this.role = this._authService.getClaims()?.['role'];
   }
 
   collapse() {
