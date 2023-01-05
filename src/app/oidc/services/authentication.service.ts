@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { User, UserManager, UserSettings, WebStorageStateStore } from 'oidc-client';
 import { UserManagerSettings } from '../models/auth-client-settings';
 
@@ -8,8 +9,14 @@ export class AuthenticationService {
   private _user!: User | null;
   private _userManager!: UserManager;
 
+  /**
+   *
+   */
+  constructor(private _route: Router) {
+  }
+
   isLoggedIn() {
-    const user: string | null = localStorage.getItem('oidc.user:https://localhost:7062:postman');
+    const user: string | null = localStorage.getItem('oidc.user:https://localhost:7062:openid');
     if (user != null) {
       this._user = JSON.parse(user??'');
     }
@@ -35,6 +42,7 @@ export class AuthenticationService {
     return this._userManager.signinRedirectCallback().then((user) => {
       this._user = user;
       this.isUserDefined = true;
+      this._route.navigateByUrl('/');
     });
   }
 
@@ -66,14 +74,14 @@ export class AuthenticationService {
 
       //set up settings
       userManagerSettings.authority = 'https://localhost:7062'; //website that responsible for Authentication
-      userManagerSettings.client_id = 'postman'; //uniqe name to identify the project
-      userManagerSettings.client_secret = 'postman-secret';
+      userManagerSettings.client_id = 'openid'; //uniqe name to identify the project
+      userManagerSettings.client_secret = 'openid-secret';
       userManagerSettings.response_type = 'code'; //desired Authentication processing flow - for angular is sutible code flow
       //specify the access privileges, specifies the information returned about the authenticated user.
       userManagerSettings.scope = 'openid';
       
       userManagerSettings.redirect_uri = 'http://localhost:4200/login'; //start login process
-      userManagerSettings.post_logout_redirect_uri = 'http://localhost:4200/home'; //start logout process
+      userManagerSettings.post_logout_redirect_uri = 'http://localhost:4200'; //start logout process
 
       //userManagerSettings.automaticSilentRenew = true;
       //userManagerSettings.silent_redirect_uri = 'http://localhost:4200/silent-callback'; //silent renew oidc doing it automaticly 
